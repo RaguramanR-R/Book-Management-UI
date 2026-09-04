@@ -1,0 +1,1197 @@
+[
+    {
+        "id": "sd_7lSHGOQLLVj7Uo4y",
+        "type": "tab",
+        "createdDate": "2026-06-01T04:23:16.282Z",
+        "label": "book_list",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 10,
+        "generateNext": true,
+        "serviceName": "book_listComponent"
+    },
+    {
+        "id": "sd_mcMmoISQ4hh5bnTS",
+        "type": "PageStart",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "book list with pagination",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "event",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "bookListWithPagination",
+        "category": "General",
+        "x": 105,
+        "y": 260,
+        "wires": [
+            [
+                "sd_48PgwQDAFz7vXESa"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "book_listComponent"
+    },
+    {
+        "id": "sd_FrDn7SPOrTMuVTt3",
+        "type": "PageVariables",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [
+            {
+                "textIp": "books",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "booksResponse.items"
+                }
+            },
+            {
+                "textIp": "totalBooks",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "booksResponse.total"
+                }
+            },
+            {
+                "textIp": "totalPages",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "totalPages"
+                }
+            },
+            {
+                "textIp": "currentPage",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "currentPage"
+                }
+            },
+            {
+                "textIp": "tableData",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "booksResponse.items"
+                }
+            }
+        ],
+        "functionName": "sd_FrDn7SPOrTMuVTt3",
+        "category": "Function",
+        "x": 525,
+        "y": 260,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_ExqX63ARZCDPOSZc",
+        "type": "HttpRequest",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "fetchBooks1",
+        "method": "get",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "bh.local.url",
+        "urlMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "url"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "observe": "",
+        "observeMapping": "",
+        "observeMappingObj": {},
+        "reportProgress": false,
+        "withCreds": true,
+        "reqBody": "",
+        "reqBodyObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": ""
+        },
+        "resultMapping": "this.page.booksResponse",
+        "resultMappingObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": "booksResponse"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "functionName": "fetchBooks1",
+        "category": "HTTP",
+        "x": 325,
+        "y": 260,
+        "wires": [
+            [
+                "sd_N0azeYZREAC7eQM3"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_48PgwQDAFz7vXESa",
+        "type": "Script",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"Paginator Event\", bh.input.event);\n\npage.currentPage = bh.input?.event?.pageIndex||0;\npage.pageSize = bh.input?.event?.pageSize||2;\npage.event=bh.input.event\npage.offset = page.currentPage * page.pageSize;\nconsole.log(\"page.currentPage\",\npage.currentPage,\"page.pageSize\",page.pageSize)\nbh.local.url =\n'http://localhost:8081/api/books?limit=' +\npage.pageSize +\n'&offset=' +\npage.offset;",
+        "functionName": "sd_48PgwQDAFz7vXESa",
+        "category": "Function",
+        "x": 225,
+        "y": 260,
+        "wires": [
+            [
+                "sd_ExqX63ARZCDPOSZc"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_N0azeYZREAC7eQM3",
+        "type": "Script",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "page.books = page.booksResponse.items || [];\npage.totalBooks = page.booksResponse.total || 0;\npage.totalPages = Math.ceil(page.totalBooks / page.pageSize);\nconsole.log(\"1111111111111111\",page.books)\nconsole.log(\"22222222222222222222\",page.totalBooks)\nconsole.log(\"333333333333333\",page.totalPages)",
+        "functionName": "sd_N0azeYZREAC7eQM3",
+        "category": "Function",
+        "x": 405,
+        "y": 260,
+        "wires": [
+            [
+                "sd_FrDn7SPOrTMuVTt3"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_yaeCMCAAgPZQav0y",
+        "type": "PageStart",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "book delete",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "bookID",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "bookDelete",
+        "category": "General",
+        "x": 65,
+        "y": 380,
+        "wires": [
+            [
+                "sd_6htZtuKspRdfgr2S"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "book_listComponent"
+    },
+    {
+        "id": "sd_40VK8QazVz6yPKqp",
+        "type": "Script",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"Book ID:\", bh.input.bookID);\n bh.local.url='http://localhost:8081/api/books/' +  bh.input.bookID\n",
+        "functionName": "sd_40VK8QazVz6yPKqp",
+        "category": "Function",
+        "x": 325,
+        "y": 380,
+        "wires": [
+            [
+                "sd_bpgOvigzSo9pX0pw"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_bpgOvigzSo9pX0pw",
+        "type": "HttpRequest",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "bookdelete",
+        "method": "delete",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "bh.local.url",
+        "urlMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "url"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "observe": "",
+        "observeMapping": "",
+        "observeMappingObj": {},
+        "reportProgress": false,
+        "withCreds": true,
+        "reqBody": "",
+        "reqBodyObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": ""
+        },
+        "resultMapping": "this.page.DeleteResult",
+        "resultMappingObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": "DeleteResult"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "functionName": "bookdelete",
+        "category": "HTTP",
+        "x": 425,
+        "y": 380,
+        "wires": [
+            [
+                "sd_nIIMYQYknOAUCiFx"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_98TXZQjLorsL43ri",
+        "type": "SnackBar",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "message": {
+            "type": "str",
+            "value": "Book Successfully Deleted"
+        },
+        "action": {
+            "type": "str",
+            "value": "Ok"
+        },
+        "duration": {
+            "type": "num",
+            "value": "3000"
+        },
+        "horizontalPosition": "center",
+        "horizontalPositionMap": "",
+        "verticalPosition": "bottom",
+        "verticalPositionMap": "",
+        "panelClass": {
+            "type": "str",
+            "value": ""
+        },
+        "direction": "ltr",
+        "functionName": "sd_98TXZQjLorsL43ri",
+        "category": "General",
+        "x": 625,
+        "y": 380,
+        "wires": [
+            [
+                "sd_4jCUfvKoi297WgZU"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_nIIMYQYknOAUCiFx",
+        "type": "PageCallService",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "sd_7lSHGOQLLVj7Uo4y",
+            "type": "tab",
+            "createdDate": "2026-06-01T04:23:16.282Z",
+            "label": "book_list",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 10
+        },
+        "flow": {
+            "flowId": "sd_mcMmoISQ4hh5bnTS",
+            "flowName": "bookListWithPagination"
+        },
+        "inputVariables": [
+            {
+                "key": "event",
+                "map": true,
+                "valueType": "this.page",
+                "value": "event"
+            }
+        ],
+        "outputMapping": [],
+        "serviceImportPath": "./",
+        "startName": "bookListWithPagination",
+        "inputParams": [
+            "this.page.event"
+        ],
+        "accept_bh": false,
+        "accept_csd": false,
+        "functionName": "sd_nIIMYQYknOAUCiFx",
+        "category": "General",
+        "x": 525,
+        "y": 380,
+        "wires": [
+            [
+                "sd_98TXZQjLorsL43ri"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_317gR6mb0XLGNxe1",
+        "type": "OnInit",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "book list",
+        "inputVariables": [],
+        "localVariables": [],
+        "outputVariables": [],
+        "pageVariables": [
+            {
+                "key": "books",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                }
+            },
+            {
+                "key": "totalBooks",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                }
+            },
+            {
+                "key": "currentPage",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                }
+            },
+            {
+                "key": "pageSize",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                }
+            },
+            {
+                "key": "totalPages",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                }
+            },
+            {
+                "key": "offset",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                }
+            }
+        ],
+        "functionName": "bookList",
+        "category": "Lifecycle Events",
+        "x": 45,
+        "y": 160,
+        "wires": [
+            [
+                "sd_5izn3R8IZ4ZvsoTc"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "book_listComponent"
+    },
+    {
+        "id": "sd_i3UOyzMyLH0NThWC",
+        "type": "PageVariables",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [
+            {
+                "textIp": "books",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "booksResponse.items"
+                }
+            },
+            {
+                "textIp": "totalBooks",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "booksResponse.total"
+                }
+            },
+            {
+                "textIp": "totalPages",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "totalPages"
+                }
+            },
+            {
+                "textIp": "currentPage",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "currentPage"
+                }
+            },
+            {
+                "textIp": "tableData",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "booksResponse.items"
+                }
+            }
+        ],
+        "functionName": "sd_i3UOyzMyLH0NThWC",
+        "category": "Function",
+        "x": 665,
+        "y": 160,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_ryo6dC6exjfVNMWZ",
+        "type": "HttpRequest",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "fetchBooks",
+        "method": "get",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "bh.local.url",
+        "urlMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "url"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "observe": "",
+        "observeMapping": "",
+        "observeMappingObj": {},
+        "reportProgress": false,
+        "withCreds": true,
+        "reqBody": "",
+        "reqBodyObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": ""
+        },
+        "resultMapping": "this.page.booksResponse",
+        "resultMappingObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": "booksResponse"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "functionName": "fetchBooks",
+        "category": "HTTP",
+        "x": 485,
+        "y": 160,
+        "wires": [
+            [
+                "sd_IYP7lStZFocX4a3E"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_b8nXqA2eZo2piRgy",
+        "type": "Script",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "\npage.currentPage = bh.input.pageIndex||0;\npage.pageSize = bh.input.pageSize||2;\npage.offset = page.currentPage * page.pageSize;\nbh.local.url='http://localhost:8081/api/books?limit=' + page.pageSize + '&offset=' + page.offset",
+        "functionName": "sd_b8nXqA2eZo2piRgy",
+        "category": "Function",
+        "x": 405,
+        "y": 160,
+        "wires": [
+            [
+                "sd_ryo6dC6exjfVNMWZ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_IYP7lStZFocX4a3E",
+        "type": "Script",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "page.books = page.booksResponse.items || [];\npage.totalBooks = page.booksResponse.total || 0;\npage.totalPages = Math.ceil(page.totalBooks / page.pageSize);\nconsole.log(\"1111111111111111\",page.books)\nconsole.log(\"22222222222222222222\",page.totalBooks)\nconsole.log(\"333333333333333\",page.totalPages)",
+        "functionName": "sd_IYP7lStZFocX4a3E",
+        "category": "Function",
+        "x": 565,
+        "y": 160,
+        "wires": [
+            [
+                "sd_i3UOyzMyLH0NThWC"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_WynB2m6Zi6rHgguc",
+        "type": "Script",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"Use Dependency loaded\");\n\nconsole.log(\"isLoggedIn =\", page.noc.isLoggedIn);\n\nconsole.log(\"page.noc.userInfo\",page.noc.userInfo);\n if (!page.noc.isLoggedIn) {\n    await page.noc.login(\"book_list\");\n} ",
+        "functionName": "sd_WynB2m6Zi6rHgguc",
+        "category": "Function",
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "sd_b8nXqA2eZo2piRgy"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_5izn3R8IZ4ZvsoTc",
+        "type": "UseDependency",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "property": "",
+        "propertyType": "bh",
+        "propertyGv": "bh.",
+        "alias": "",
+        "modules": [
+            {
+                "textIp": "NeutrinosOAuthClientService",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "noc"
+                },
+                "injectable": true
+            }
+        ],
+        "import_all": false,
+        "library": "neutrinos-oauth-client",
+        "serviceDesignerType": "pages",
+        "functionName": "sd_5izn3R8IZ4ZvsoTc",
+        "category": "Function",
+        "x": 220,
+        "y": 160,
+        "wires": [
+            [
+                "sd_WynB2m6Zi6rHgguc"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_tfFqwrZSiAFO0GLf",
+        "type": "Navigation",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "path": "/edit_book/:id",
+        "pathparams": [
+            {
+                "paramKey": "id",
+                "paramValue": {
+                    "type": "bh.input",
+                    "value": "id"
+                }
+            }
+        ],
+        "resultMapping": {
+            "type": "bh.input",
+            "value": "id"
+        },
+        "functionName": "sd_tfFqwrZSiAFO0GLf",
+        "category": "Navigation",
+        "x": 405,
+        "y": 680,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_TIkyyjTSDLzqnyaY",
+        "type": "PageStart",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "edit",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "id",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "edit",
+        "category": "General",
+        "x": 145,
+        "y": 680,
+        "wires": [
+            [
+                "sd_c9hmmkv7ShaQzYRp"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "book_listComponent"
+    },
+    {
+        "id": "sd_c9hmmkv7ShaQzYRp",
+        "type": "Script",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"pageInput\", bh.pageInput);\nconsole.log(\"id111111\", bh.input.id);\n\nbh.local.id = bh.input.id;",
+        "functionName": "sd_c9hmmkv7ShaQzYRp",
+        "category": "Function",
+        "x": 260,
+        "y": 680,
+        "wires": [
+            [
+                "sd_tfFqwrZSiAFO0GLf"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_cor3vjUxz8sVuMoC",
+        "type": "PageStart",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "logout",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "logout",
+        "category": "General",
+        "x": 105,
+        "y": 480,
+        "wires": [
+            [
+                "sd_fOQuU78Y20owXCbs"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "book_listComponent"
+    },
+    {
+        "id": "sd_K6dX1UC0oOOM94WB",
+        "type": "HttpRequest",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "auditlog",
+        "method": "get",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "\"http://localhost:8081/api/logout\"",
+        "urlMappingObj": {
+            "mapVarType": "str",
+            "mapVarValue": "http://localhost:8081/api/logout"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "observe": "",
+        "observeMapping": "",
+        "observeMappingObj": {},
+        "reportProgress": false,
+        "withCreds": true,
+        "reqBody": "",
+        "reqBodyObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": ""
+        },
+        "resultMapping": "bh.local.result",
+        "resultMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "result"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "functionName": "auditlog",
+        "category": "HTTP",
+        "x": 405,
+        "y": 480,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_fOQuU78Y20owXCbs",
+        "type": "Script",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"111111111111111\")\nawait page.noc.logout();",
+        "functionName": "sd_fOQuU78Y20owXCbs",
+        "category": "Function",
+        "x": 305,
+        "y": 480,
+        "wires": [
+            [
+                "sd_K6dX1UC0oOOM94WB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_6htZtuKspRdfgr2S",
+        "type": "OpenDialog",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 4,
+        "flow": {
+            "flowId": "sd_liO2FaCdv2OL4vQb",
+            "label": "deleteconfirmationbox"
+        },
+        "relativePath": "app/components/deleteconfirmationbox",
+        "data": "this.page",
+        "ariaDescribedBy": "this.page",
+        "ariaLabel": "this.page",
+        "ariaLabelledBy": "this.page",
+        "autoFocus": "this.page",
+        "backdropClass": "this.page",
+        "closeOnNavigation": "this.page",
+        "direction": "this.page",
+        "disableClose": "this.page",
+        "hasBackdrop": true,
+        "height": "this.page",
+        "maxHeight": "this.page",
+        "minHeight": "this.page",
+        "width": "this.page",
+        "maxWidth": "this.page",
+        "minWidth": "this.page",
+        "panelClass": "this.page",
+        "position": "this.page",
+        "restoreFocus": "this.page",
+        "role": "this.page",
+        "resultMapping": "bh.local.isConfirmed",
+        "functionName": "sd_6htZtuKspRdfgr2S",
+        "category": "Dialog",
+        "x": 145,
+        "y": 380,
+        "wires": [
+            [],
+            [
+                "sd_t03mhnUwgPKATu74"
+            ],
+            [],
+            []
+        ],
+        "__ssdTypeInputs__": {
+            "data": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "ariaDescribedBy": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "ariaLabel": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "ariaLabelledBy": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "autoFocus": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "backdropClass": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "closeOnNavigation": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "direction": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "disableClose": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "hasBackdrop": {
+                "type": "bool",
+                "value": "true",
+                "constant": false
+            },
+            "height": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "maxHeight": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "minHeight": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "width": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "maxWidth": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "minWidth": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "panelClass": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "position": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "restoreFocus": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "role": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "isConfirmed",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_t03mhnUwgPKATu74",
+        "type": "PageSwitch",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "isConfirmed",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.isConfirmed",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str",
+                "gv": "\"true\""
+            },
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str",
+                "gv": "\"false\""
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_t03mhnUwgPKATu74",
+        "category": "Function",
+        "x": 245,
+        "y": 380,
+        "wires": [
+            [
+                "sd_40VK8QazVz6yPKqp"
+            ],
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_XFW5cFn7VCoiWLuk",
+        "type": "Catch",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "selectedNodes": [
+            "sd_yaeCMCAAgPZQav0y"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "sd_XFW5cFn7VCoiWLuk",
+        "category": "General",
+        "x": 725,
+        "y": 380,
+        "wires": [
+            [
+                "sd_lr6s2mYpnHtGGQAG"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "book_listComponent"
+    },
+    {
+        "id": "sd_htDC4KaLKfWUFQM0",
+        "type": "SnackBar",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "message": {
+            "type": "bh",
+            "value": "error.error.error"
+        },
+        "action": {
+            "type": "str",
+            "value": "Ok"
+        },
+        "duration": {
+            "type": "num",
+            "value": "3000"
+        },
+        "horizontalPosition": "center",
+        "horizontalPositionMap": "",
+        "verticalPosition": "top",
+        "verticalPositionMap": "",
+        "panelClass": {
+            "type": "str",
+            "value": ""
+        },
+        "direction": "ltr",
+        "functionName": "sd_htDC4KaLKfWUFQM0",
+        "category": "General",
+        "x": 905,
+        "y": 380,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_lr6s2mYpnHtGGQAG",
+        "type": "Script",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"bh.error\",bh.error)\nconsole.log(\"bh.error.error\",bh.error.error)\nconsole.log(\"bh.error.error.error\",bh.error.error.error)",
+        "functionName": "sd_lr6s2mYpnHtGGQAG",
+        "category": "Function",
+        "x": 805,
+        "y": 380,
+        "wires": [
+            [
+                "sd_htDC4KaLKfWUFQM0"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_4jCUfvKoi297WgZU",
+        "type": "Log",
+        "z": "sd_7lSHGOQLLVj7Uo4y",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 0,
+        "logObject": "bh",
+        "functionName": "sd_4jCUfvKoi297WgZU",
+        "category": "General",
+        "x": 705,
+        "y": 480,
+        "wires": [],
+        "__ssdTypeInputs__": {
+            "logObject": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "book_listComponent",
+        "generated": true
+    }
+]

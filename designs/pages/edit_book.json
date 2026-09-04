@@ -1,0 +1,658 @@
+[
+    {
+        "id": "sd_BaHhazctwqateDfl",
+        "type": "tab",
+        "createdDate": "2026-06-30T06:09:14.277Z",
+        "label": "edit_book",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "edit_bookComponent"
+    },
+    {
+        "id": "sd_d1AWZETE8Q8Z8urM",
+        "type": "OnInit",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "inputVariables": [],
+        "localVariables": [],
+        "outputVariables": [],
+        "pageVariables": [
+            {
+                "key": "id",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                }
+            }
+        ],
+        "functionName": "sd_d1AWZETE8Q8Z8urM",
+        "category": "Lifecycle Events",
+        "x": 45,
+        "y": 80,
+        "wires": [
+            [
+                "sd_bmyIZfoChz3wliAF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "edit_bookComponent"
+    },
+    {
+        "id": "sd_Qcsq6t842TcPCHu6",
+        "type": "PageVariables",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [
+            {
+                "textIp": "tableData",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "result"
+                }
+            }
+        ],
+        "functionName": "sd_Qcsq6t842TcPCHu6",
+        "category": "Function",
+        "x": 565,
+        "y": 80,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_yGpEAahBAr46AKBn",
+        "type": "Script",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "\nbh.local.url = 'http://localhost:8081/api/books/'+page.id;\n\n\n",
+        "functionName": "sd_yGpEAahBAr46AKBn",
+        "category": "Function",
+        "x": 405,
+        "y": 80,
+        "wires": [
+            [
+                "sd_2cBylVYkachA3izv"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_5xiWVsJQVHyy7A6y",
+        "type": "NavigationData",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "tmpOp": "",
+        "tmpOpType": "",
+        "operationType": "paramMap",
+        "operation": "get",
+        "key": "\"id\"",
+        "resultMapping": "this.page.id",
+        "functionName": "sd_5xiWVsJQVHyy7A6y",
+        "category": "Navigation",
+        "x": 325,
+        "y": 80,
+        "wires": [
+            [
+                "sd_yGpEAahBAr46AKBn"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "key": {
+                "type": "str",
+                "value": "id",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "this.page",
+                "value": "id",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_bmyIZfoChz3wliAF",
+        "type": "UseDependency",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "property": "",
+        "propertyType": "bh",
+        "propertyGv": "bh.",
+        "alias": "",
+        "modules": [
+            {
+                "textIp": "NeutrinosOAuthClientService",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "noc"
+                },
+                "injectable": true
+            }
+        ],
+        "import_all": false,
+        "library": "neutrinos-oauth-client",
+        "serviceDesignerType": "pages",
+        "functionName": "sd_bmyIZfoChz3wliAF",
+        "category": "Function",
+        "x": 145,
+        "y": 80,
+        "wires": [
+            [
+                "sd_gC0dNSwa8WexoVvq"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_gC0dNSwa8WexoVvq",
+        "type": "Script",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "\n if (!page.noc.isLoggedIn) {\n    await page.noc.login(\"book_list\");\n} ",
+        "functionName": "sd_gC0dNSwa8WexoVvq",
+        "category": "Function",
+        "x": 245,
+        "y": 80,
+        "wires": [
+            [
+                "sd_5xiWVsJQVHyy7A6y"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_2cBylVYkachA3izv",
+        "type": "HttpRequest",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "fetchBooks",
+        "method": "get",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "bh.local.url",
+        "urlMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "url"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "observe": "",
+        "observeMapping": "",
+        "observeMappingObj": {},
+        "reportProgress": false,
+        "withCreds": true,
+        "reqBody": "",
+        "reqBodyObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": ""
+        },
+        "resultMapping": "this.page.result",
+        "resultMappingObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": "result"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "functionName": "fetchBooks",
+        "category": "HTTP",
+        "x": 485,
+        "y": 80,
+        "wires": [
+            [
+                "sd_Qcsq6t842TcPCHu6"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_kZbQmVgq77OGpQOD",
+        "type": "PageStart",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "Update",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "isbn",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "id",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "update",
+        "category": "General",
+        "x": 45,
+        "y": 200,
+        "wires": [
+            [
+                "sd_YNWo7sMgeLg5nuh3"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "edit_bookComponent"
+    },
+    {
+        "id": "sd_BC9lgMlv1R6fPhUy",
+        "type": "Script",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"Page ISBN:\", page.isbn);\nconsole.log(\"page.local.id:\", page.id);\n\n\n\nbh.local.url = \"http://localhost:8081/api/books/\" + page.id;\nbh.local.req={\n    isbn:page.isbn\n}",
+        "functionName": "sd_BC9lgMlv1R6fPhUy",
+        "category": "Function",
+        "x": 265,
+        "y": 200,
+        "wires": [
+            [
+                "sd_Co0eLWfdIwMVVBmW"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_Co0eLWfdIwMVVBmW",
+        "type": "HttpRequest",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "UpdateAPI",
+        "method": "put",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "bh.local.url",
+        "urlMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "url"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "observe": "",
+        "observeMapping": "",
+        "observeMappingObj": {},
+        "reportProgress": false,
+        "withCreds": true,
+        "reqBody": "bh.local.req",
+        "reqBodyObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "req"
+        },
+        "resultMapping": "bh.local.apiResponse",
+        "resultMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "apiResponse"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "functionName": "updateApi",
+        "category": "HTTP",
+        "x": 345,
+        "y": 200,
+        "wires": [
+            [
+                "sd_96mSUcU5RGt0y5d2"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_YNWo7sMgeLg5nuh3",
+        "type": "NavigationData",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "operationType": "paramMap",
+        "operation": "get",
+        "key": "\"id\"",
+        "resultMapping": "this.page.id",
+        "functionName": "sd_YNWo7sMgeLg5nuh3",
+        "category": "Navigation",
+        "x": 165,
+        "y": 200,
+        "wires": [
+            [
+                "sd_BC9lgMlv1R6fPhUy"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "key": {
+                "type": "str",
+                "value": "id",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "this.page",
+                "value": "id",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_Bn0Ii0UZKxUfolDP",
+        "type": "Navigation",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "path": "/book_list",
+        "pathMap": "",
+        "pathparams": "",
+        "pathparamsMap": "",
+        "qparams": "",
+        "qparamsMap": "",
+        "qparamsArray": "",
+        "resultMapping": "",
+        "functionName": "sd_Bn0Ii0UZKxUfolDP",
+        "category": "Navigation",
+        "x": 505,
+        "y": 200,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_96mSUcU5RGt0y5d2",
+        "type": "OpenDialog",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 4,
+        "flow": {
+            "flowId": "sd_Asrcb30gvj1iLzKq",
+            "label": "dialogbox"
+        },
+        "relativePath": "app/components/dialogbox",
+        "data": "bh.local.apiResponse.book",
+        "ariaDescribedBy": "this.page",
+        "ariaLabel": "this.page",
+        "ariaLabelledBy": "this.page",
+        "autoFocus": "this.page",
+        "backdropClass": "this.page",
+        "closeOnNavigation": "this.page",
+        "direction": "this.page",
+        "disableClose": "this.page",
+        "hasBackdrop": "this.page",
+        "height": "this.page",
+        "maxHeight": "this.page",
+        "minHeight": "this.page",
+        "width": "this.page",
+        "maxWidth": "this.page",
+        "minWidth": "this.page",
+        "panelClass": "this.page",
+        "position": "this.page",
+        "restoreFocus": "this.page",
+        "role": "this.page",
+        "resultMapping": "this.page",
+        "functionName": "sd_96mSUcU5RGt0y5d2",
+        "category": "Dialog",
+        "x": 425,
+        "y": 200,
+        "wires": [
+            [],
+            [
+                "sd_Bn0Ii0UZKxUfolDP"
+            ],
+            [],
+            []
+        ],
+        "__ssdTypeInputs__": {
+            "data": {
+                "type": "bh.local",
+                "value": "apiResponse.book",
+                "constant": false
+            },
+            "ariaDescribedBy": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "ariaLabel": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "ariaLabelledBy": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "autoFocus": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "backdropClass": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "closeOnNavigation": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "direction": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "disableClose": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "hasBackdrop": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "height": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "maxHeight": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "minHeight": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "width": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "maxWidth": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "minWidth": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "panelClass": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "position": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "restoreFocus": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "role": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "this.page",
+                "value": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_jZ21t3awhPoBYM5u",
+        "type": "Catch",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "selectedNodes": [
+            "sd_Co0eLWfdIwMVVBmW"
+        ],
+        "selectCatchType": "selectednodes",
+        "masternodeList": "",
+        "ignoreList": "",
+        "functionName": "sd_jZ21t3awhPoBYM5u",
+        "category": "General",
+        "x": 645,
+        "y": 140,
+        "wires": [
+            [
+                "sd_Oa9itLvksAjDyvjw"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "edit_bookComponent"
+    },
+    {
+        "id": "sd_Oa9itLvksAjDyvjw",
+        "type": "SnackBar",
+        "z": "sd_BaHhazctwqateDfl",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "message": {
+            "type": "bh",
+            "value": "error.error.error"
+        },
+        "action": {
+            "type": "str",
+            "value": "Ok"
+        },
+        "duration": {
+            "type": "num",
+            "value": "3000"
+        },
+        "horizontalPosition": "center",
+        "verticalPosition": "top",
+        "panelClass": {
+            "type": "str",
+            "value": ""
+        },
+        "direction": "ltr",
+        "functionName": "sd_Oa9itLvksAjDyvjw",
+        "category": "General",
+        "x": 785,
+        "y": 140,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "edit_bookComponent",
+        "generated": true
+    }
+]

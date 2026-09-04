@@ -1,0 +1,140 @@
+[
+    {
+        "id": "sd_Asrcb30gvj1iLzKq",
+        "type": "tab",
+        "createdDate": "2026-07-02T17:33:14.867Z",
+        "label": "dialogbox",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "dialogboxComponent"
+    },
+    {
+        "id": "sd_PWzLdl0tIk5OAVwL",
+        "type": "OnInit",
+        "z": "sd_Asrcb30gvj1iLzKq",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "inputVariables": [],
+        "localVariables": [],
+        "outputVariables": [],
+        "pageVariables": [],
+        "functionName": "sd_PWzLdl0tIk5OAVwL",
+        "category": "Lifecycle Events",
+        "x": 25,
+        "y": 40,
+        "wires": [
+            [
+                "sd_LqVZDpWkKYPr1wi4"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "dialogboxComponent"
+    },
+    {
+        "id": "sd_Nw6eACIIhLWYY3qA",
+        "type": "PageVariables",
+        "z": "sd_Asrcb30gvj1iLzKq",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [],
+        "functionName": "sd_Nw6eACIIhLWYY3qA",
+        "category": "Function",
+        "x": 365,
+        "y": 40,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "dialogboxComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_LqVZDpWkKYPr1wi4",
+        "type": "GetDialogData",
+        "z": "sd_Asrcb30gvj1iLzKq",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "dialogDataMapping": "this.page.bookDetails",
+        "functionName": "sd_LqVZDpWkKYPr1wi4",
+        "category": "Dialog",
+        "x": 140,
+        "y": 40,
+        "wires": [
+            [
+                "sd_Nw6eACIIhLWYY3qA"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "dialogDataMapping": {
+                "type": "this.page",
+                "value": "bookDetails",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "dialogboxComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_G9GVwT2ovHpUeCZO",
+        "type": "PageStart",
+        "z": "sd_Asrcb30gvj1iLzKq",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "close",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "close",
+        "category": "General",
+        "x": 85,
+        "y": 200,
+        "wires": [
+            [
+                "sd_ye24WsXbnyf0TJYU"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "dialogboxComponent"
+    },
+    {
+        "id": "sd_ye24WsXbnyf0TJYU",
+        "type": "CloseDialog",
+        "z": "sd_Asrcb30gvj1iLzKq",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "closeDialog ",
+        "data": "\"true\"",
+        "functionName": "closeDialog",
+        "category": "Dialog",
+        "x": 200,
+        "y": 200,
+        "wires": [
+            []
+        ],
+        "__ssdTypeInputs__": {
+            "data": {
+                "type": "str",
+                "value": "true",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "dialogboxComponent",
+        "generated": true
+    }
+]

@@ -1,0 +1,47 @@
+<div fxLayout="column wrap" fxLayoutAlign="start stretch" [fxShow]="true">
+  <div fxLayout="row wrap" style="display: flex; align-items: center; justify-content: space-between; width: 100%; position: relative;margin-top:20px;" fxLayoutAlign="space-between stretch" [fxShow]="true">
+    <h3 style="color: black;     text-align: center;     font-weight: 800; position: absolute; left: 50%; transform: translateX(-50%); margin: 0; ">
+      Book Management
+    </h3><button mat-button style="margin-left: auto;background:red; color: white; margin-top: 10px; margin-bottom: 10px;" class="logout-icon-btn" (click)="logout()"></button>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="space-between stretch" [fxShow]="true"><button mat-button class="add-btn" color="warn" routerLink="/addbook">Add Book</button><button mat-button style="background: #1976d2; color: white; margin-top: 10px; margin-bottom: 10px;" routerLink="/audit_list">Audit</button></div>
+  <div fxLayout="column" style="width:100%; border:1px solid black;">
+    <table mat-table [dataSource]="page?.tableData" class="table-width-fix">
+      <tr mat-header-row *matHeaderRowDef="[&apos;id&apos;,&apos;isbn&apos;,&apos;title&apos;,&apos;author&apos;,&apos;publishedYear&apos;,&apos;0115e302-1d2b-7a3d-c186-a0c1a8546100&apos;]"></tr>
+      <tr mat-row *matRowDef="let row; columns: [&apos;id&apos;,&apos;isbn&apos;,&apos;title&apos;,&apos;author&apos;,&apos;publishedYear&apos;,&apos;0115e302-1d2b-7a3d-c186-a0c1a8546100&apos;];"></tr>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let table; let i = index;">{{table.id}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="isbn">
+        <th mat-header-cell *matHeaderCellDef>ISBN</th>
+        <td mat-cell *matCellDef="let table; let i = index;">{{table.isbn}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td mat-cell *matCellDef="let table; let i = index;">{{table.title}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef>Author</th>
+        <td mat-cell *matCellDef="let table; let i = index;">{{table.author}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="publishedYear">
+        <th mat-header-cell *matHeaderCellDef>Published Year </th>
+        <td mat-cell *matCellDef="let table; let i = index;">{{table.publishedYear}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="0115e302-1d2b-7a3d-c186-a0c1a8546100">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let table; let i = index;"><button mat-button style="margin-right:10px;" class="edit-btn" (click)="edit(table.id)">Edit</button><button mat-button class="delete-btn" (click)="bookDelete(table.id,$event)">Delete</button></td>
+      </ng-container>
+    </table>
+    <mat-paginator [length]="page.totalBooks" [pageSize]="page.pageSize" [pageSizeOptions]="[2,5, 10, 25, 100]" (page)="bookListWithPagination($event)">
+    </mat-paginator>
+
+  </div>
+</div>

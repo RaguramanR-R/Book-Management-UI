@@ -1,0 +1,783 @@
+[
+    {
+        "id": "sd_poIb4FYBzHbhBPh0",
+        "type": "tab",
+        "createdDate": "2026-06-19T07:44:15.168Z",
+        "label": "audit_list",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 2,
+        "generateNext": true,
+        "serviceName": "audit_listComponent"
+    },
+    {
+        "id": "sd_0jFilkDZREyjjNSb",
+        "type": "PageVariables",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [
+            {
+                "textIp": "auditData",
+                "typedIpValue": {
+                    "type": "bh.local",
+                    "value": "result"
+                }
+            }
+        ],
+        "functionName": "sd_0jFilkDZREyjjNSb",
+        "category": "Function",
+        "x": 685,
+        "y": 40,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_Xn9VHGwzhklGGm6y",
+        "type": "Script",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "let params = [];\n\nif (bh.input.startTime) {\n    params.push('startTime=' + encodeURIComponent(bh.input.startTime));\n}\n\nif (bh.input.endTime) {\n    params.push('endTime=' + encodeURIComponent(bh.input.endTime));\n}\n\nif (bh.input.operation) {\n    params.push('operation=' + encodeURIComponent(bh.input.operation));\n}\n\nbh.local.url = 'http://localhost:8081/api/audits';\n\nif (params.length > 0) {\n    bh.local.url += '?' + params.join('&');\n}\n\nconsole.log('Audit URL:', bh.local.url);",
+        "functionName": "sd_Xn9VHGwzhklGGm6y",
+        "category": "Function",
+        "x": 365,
+        "y": 40,
+        "wires": [
+            [
+                "sd_apI5iensKtH0Ha9g"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_apI5iensKtH0Ha9g",
+        "type": "HttpRequest",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "fetch Auditlist",
+        "method": "get",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "bh.local.url",
+        "urlMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "url"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "observe": "",
+        "observeMapping": "",
+        "observeMappingObj": {},
+        "reportProgress": false,
+        "withCreds": true,
+        "reqBody": "",
+        "reqBodyObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": ""
+        },
+        "resultMapping": "bh.local.auditResponse",
+        "resultMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "auditResponse"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "functionName": "fetchAuditlist",
+        "category": "HTTP",
+        "x": 465,
+        "y": 40,
+        "wires": [
+            [
+                "sd_5sVqBXN320yyU1P5"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_RTkm0wVTlApwloHp",
+        "type": "OnInit",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "inputVariables": [],
+        "localVariables": [],
+        "outputVariables": [],
+        "pageVariables": [
+            {
+                "key": "auditData",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                }
+            },
+            {
+                "key": "operation",
+                "defaultValue": {
+                    "type": "any",
+                    "value": "\"\""
+                }
+            },
+            {
+                "key": "startTime",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                }
+            },
+            {
+                "key": "endTime",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                }
+            }
+        ],
+        "functionName": "sd_RTkm0wVTlApwloHp",
+        "category": "Lifecycle Events",
+        "x": 45,
+        "y": 40,
+        "wires": [
+            [
+                "sd_3yoTIKlom74tgZ8y"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "audit_listComponent"
+    },
+    {
+        "id": "sd_ehFOpsl8P3oUiw08",
+        "type": "PageStart",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "auditData",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "operation",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "startTime",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "endTime",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "sd_ehFOpsl8P3oUiw08",
+        "category": "General",
+        "x": 140,
+        "y": 380,
+        "wires": [
+            [
+                "sd_7SfBt9ZcbBE9fDRF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "audit_listComponent"
+    },
+    {
+        "id": "sd_7SfBt9ZcbBE9fDRF",
+        "type": "Script",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "let operation = (page.operation || \"\").trim().toUpperCase();\n\n\nfunction formatDate(date: Date) {\n    const d = new Date(date);\n\n    const yyyy = d.getFullYear();\n    const MM = String(d.getMonth() + 1).padStart(2, '0');\n    const dd = String(d.getDate()).padStart(2, '0');\n    const HH = String(d.getHours()).padStart(2, '0');\n    const mm = String(d.getMinutes()).padStart(2, '0');\n    const ss = String(d.getSeconds()).padStart(2, '0');\n\n    return `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}`;\n}\nlet url = \"http://localhost:8081/api/report/pdf\";\n\nlet params = [];\n\nif (page.startTime) {\n    params.push(\n        `startTime=${encodeURIComponent(formatDate(page.startTime))}`\n    );\n}\n\nif (page.endTime) {\n    params.push(\n        `endTime=${encodeURIComponent(formatDate(page.endTime))}`\n    );\n}\n\nif (operation) {\n\n    params.push(`operation=${encodeURIComponent(operation)}`);\n\n}\n\nif (params.length > 0) {\n    url += \"?\" + params.join(\"&\");\n}\n\nbh.local.url = url;\n\nconsole.log(\"FILTER URL:\", url);",
+        "functionName": "sd_7SfBt9ZcbBE9fDRF",
+        "category": "Function",
+        "x": 285,
+        "y": 380,
+        "wires": [
+            [
+                "sd_1sNwupheRI8XTPyA"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_1sNwupheRI8XTPyA",
+        "type": "HttpRequest",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "pdfdownload",
+        "method": "get",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "bh.local.url",
+        "urlMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "url"
+        },
+        "ret": "blob",
+        "retMapping": "",
+        "retMappingObj": {},
+        "observe": "",
+        "observeMapping": "",
+        "observeMappingObj": {},
+        "reportProgress": false,
+        "withCreds": true,
+        "reqBody": "",
+        "reqBodyObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": ""
+        },
+        "resultMapping": "this.page.PdfResponse",
+        "resultMappingObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": "PdfResponse"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "functionName": "pdfdownload",
+        "category": "HTTP",
+        "x": 425,
+        "y": 380,
+        "wires": [
+            [
+                "sd_kMZIBmCMLwwxkZXd"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_kMZIBmCMLwwxkZXd",
+        "type": "Script",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\"Pdfresponse =\", page.PdfResponse);\nconsole.log(\"page =\", page);\nconst url = window.URL.createObjectURL(page.PdfResponse);\nconst a = document.createElement('a');\na.href = url;\na.download = 'Audit_Report.pdf';\n\ndocument.body.appendChild(a);\na.click();\ndocument.body.removeChild(a);\n\nwindow.URL.revokeObjectURL(url);",
+        "functionName": "sd_kMZIBmCMLwwxkZXd",
+        "category": "Function",
+        "x": 565,
+        "y": 380,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_QeC8GrAReBSK0eAc",
+        "type": "PageStart",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "audit Search",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "operation",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "startTime",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "endTime",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            },
+            {
+                "key": "auditData",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "auditSearch",
+        "category": "General",
+        "x": 105,
+        "y": 540,
+        "wires": [
+            [
+                "sd_KKvvktw1j2baj1W9"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "audit_listComponent"
+    },
+    {
+        "id": "sd_KKvvktw1j2baj1W9",
+        "type": "Script",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "filter script",
+        "script": "let operation = (bh.input.operation || \"\").trim().toUpperCase();\nconsole.log(\"bh.input.startTime\",bh.input.startTime)\nconsole.log(\"bh.input.endTime\",bh.input.endTime)\n\nconsole.log(\"operation\",operation)\nfunction formatDate(date: Date) {\n    const d = new Date(date);\n\n    const yyyy = d.getFullYear();\n    const MM = String(d.getMonth() + 1).padStart(2, '0');\n    const dd = String(d.getDate()).padStart(2, '0');\n    const HH = String(d.getHours()).padStart(2, '0');\n    const mm = String(d.getMinutes()).padStart(2, '0');\n    const ss = String(d.getSeconds()).padStart(2, '0');\n\n    return `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}`;\n}\nlet url = \"http://localhost:8081/api/audits\";\n\nlet params = [];\n\nif (bh.input.startTime) {\n    params.push(\n        `startTime=${encodeURIComponent(formatDate(bh.input.startTime))}`\n    );\n}\n\nif (bh.input.endTime) {\n    params.push(\n        `endTime=${encodeURIComponent(formatDate(bh.input.endTime))}`\n    );\n}\n\nif (operation) {\n\n    params.push(`operation=${encodeURIComponent(operation)}`);\n\n}\n\nif (params.length > 0) {\n    url += \"?\" + params.join(\"&\");\n}\n\nbh.local.url = url;\n\nconsole.log(\"FILTER URL:\", url);",
+        "functionName": "filterScript",
+        "category": "Function",
+        "x": 225,
+        "y": 540,
+        "wires": [
+            [
+                "sd_AWlm7unFQ0mwHVa0"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_hcW85k4th5hDnupu",
+        "type": "PageVariables",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "page variable after filter",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [
+            {
+                "textIp": "auditData",
+                "typedIpValue": {
+                    "type": "bh.local",
+                    "value": "result"
+                }
+            }
+        ],
+        "functionName": "pageVariableAfterFilter",
+        "category": "Function",
+        "x": 585,
+        "y": 540,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_AWlm7unFQ0mwHVa0",
+        "type": "HttpRequest",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "method": "get",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "bh.local.url",
+        "urlMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "url"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "observe": "",
+        "observeMapping": "",
+        "observeMappingObj": {},
+        "reportProgress": false,
+        "withCreds": true,
+        "reqBody": "",
+        "reqBodyObj": {
+            "mapVarType": "this.page",
+            "mapVarValue": ""
+        },
+        "resultMapping": "bh.local.searchResponse",
+        "resultMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "searchResponse"
+        },
+        "headers": {},
+        "headersObj": [],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "functionName": "sd_AWlm7unFQ0mwHVa0",
+        "category": "HTTP",
+        "x": 320,
+        "y": 540,
+        "wires": [
+            [
+                "sd_QWghNxVUBQyr4VoP"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_1f1OJeOvQkfbIdoK",
+        "type": "PageStart",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "searchclear",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "searchclear",
+        "category": "General",
+        "x": 105,
+        "y": 660,
+        "wires": [
+            [
+                "sd_Q1RNomLyXDIyP5Xy"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "audit_listComponent"
+    },
+    {
+        "id": "sd_Q1RNomLyXDIyP5Xy",
+        "type": "Script",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "page.operation = \"\";\npage.startTime = null;\npage.endTime = null;",
+        "functionName": "sd_Q1RNomLyXDIyP5Xy",
+        "category": "Function",
+        "x": 225,
+        "y": 660,
+        "wires": [
+            [
+                "sd_nEk9FXDd0HceLbrV"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_nEk9FXDd0HceLbrV",
+        "type": "PageCallService",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "sd_poIb4FYBzHbhBPh0",
+            "type": "tab",
+            "createdDate": "2026-06-19T07:44:15.168Z",
+            "label": "audit_list",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 2
+        },
+        "flow": {
+            "flowId": "sd_QeC8GrAReBSK0eAc",
+            "flowName": "auditSearch"
+        },
+        "inputVariables": [
+            {
+                "key": "operation",
+                "map": true,
+                "valueType": "bh",
+                "value": ""
+            },
+            {
+                "key": "startTime",
+                "map": true,
+                "valueType": "bh",
+                "value": ""
+            },
+            {
+                "key": "endTime",
+                "map": true,
+                "valueType": "bh",
+                "value": ""
+            },
+            {
+                "key": "auditData",
+                "map": true,
+                "valueType": "bh",
+                "value": ""
+            }
+        ],
+        "outputMapping": [],
+        "serviceImportPath": "./",
+        "startName": "auditSearch",
+        "inputParams": [
+            null,
+            null,
+            null,
+            null
+        ],
+        "accept_bh": false,
+        "accept_csd": false,
+        "functionName": "sd_nEk9FXDd0HceLbrV",
+        "category": "General",
+        "x": 325,
+        "y": 660,
+        "wires": [
+            [
+                "sd_TjujWklxZn74iFS1"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_TjujWklxZn74iFS1",
+        "type": "PageVariables",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [
+            {
+                "textIp": "auditData",
+                "typedIpValue": {
+                    "type": "bh.local",
+                    "value": "searchResponse"
+                }
+            }
+        ],
+        "functionName": "sd_TjujWklxZn74iFS1",
+        "category": "Function",
+        "x": 445,
+        "y": 660,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_sHVLuaEoJ8JayclK",
+        "type": "UseDependency",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "client-pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "property": "",
+        "propertyType": "bh",
+        "propertyGv": "bh.",
+        "alias": "",
+        "modules": [
+            {
+                "textIp": "NeutrinosOAuthClientService",
+                "typedIpValue": {
+                    "type": "this.page",
+                    "value": "noc"
+                },
+                "injectable": true
+            }
+        ],
+        "import_all": false,
+        "library": "neutrinos-oauth-client",
+        "serviceDesignerType": "pages",
+        "functionName": "sd_sHVLuaEoJ8JayclK",
+        "category": "Function",
+        "x": 205,
+        "y": 40,
+        "wires": [
+            [
+                "sd_wo9lGbiSdy87JJvB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_wo9lGbiSdy87JJvB",
+        "type": "Script",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "\n if (!page.noc.isLoggedIn) {\n    await page.noc.login(\"book_list\");\n} ",
+        "functionName": "sd_wo9lGbiSdy87JJvB",
+        "category": "Function",
+        "x": 285,
+        "y": 40,
+        "wires": [
+            [
+                "sd_Xn9VHGwzhklGGm6y"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_QWghNxVUBQyr4VoP",
+        "type": "Script",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "function convertToLocalTime(utcDate) {\n    const date = new Date(utcDate);\n\n    const day = String(date.getDate()).padStart(2, '0');\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n    const year = date.getFullYear();\n\n    const hours = String(date.getHours()).padStart(2, '0');\n    const minutes = String(date.getMinutes()).padStart(2, '0');\n    const seconds = String(date.getSeconds()).padStart(2, '0');\n\n    return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;\n}\n\nbh.local.result= bh.local.searchResponse.map(item => ({\n    ...item,\n    timestamp: convertToLocalTime(item.timestamp)\n}));",
+        "functionName": "sd_QWghNxVUBQyr4VoP",
+        "category": "Function",
+        "x": 420,
+        "y": 540,
+        "wires": [
+            [
+                "sd_hcW85k4th5hDnupu"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_5sVqBXN320yyU1P5",
+        "type": "Script",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "function convertToLocalTime(utcDate) {\n    const date = new Date(utcDate);\n\n    const day = String(date.getDate()).padStart(2, '0');\n    const month = String(date.getMonth() + 1).padStart(2, '0');\n    const year = date.getFullYear();\n\n    const hours = String(date.getHours()).padStart(2, '0');\n    const minutes = String(date.getMinutes()).padStart(2, '0');\n    const seconds = String(date.getSeconds()).padStart(2, '0');\n\n    return `${day}-${month}-${year} ${hours}:${minutes}:${seconds}`;\n}\n\nbh.local.result= bh.local.auditResponse.map(item => ({\n    ...item,\n    timestamp: convertToLocalTime(item.timestamp)\n}));",
+        "functionName": "sd_5sVqBXN320yyU1P5",
+        "category": "Function",
+        "x": 565,
+        "y": 40,
+        "wires": [
+            [
+                "sd_0jFilkDZREyjjNSb"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_3yoTIKlom74tgZ8y",
+        "type": "PageVariables",
+        "z": "sd_poIb4FYBzHbhBPh0",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [
+            {
+                "textIp": "scroll",
+                "typedIpValue": {
+                    "type": "literal",
+                    "value": "0"
+                }
+            }
+        ],
+        "functionName": "sd_3yoTIKlom74tgZ8y",
+        "category": "Function",
+        "x": 125,
+        "y": 40,
+        "wires": [
+            [
+                "sd_sHVLuaEoJ8JayclK"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "audit_listComponent",
+        "generated": true
+    }
+]

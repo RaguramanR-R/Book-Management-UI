@@ -1,0 +1,22 @@
+<div fxLayout="column wrap" class="dialog-container" fxLayoutAlign="start stretch" [fxShow]="true">
+  <div class="dialog-success-heading">
+    Book Updated Successfully</div>
+  <div class="dialog-subheading">
+    Updated Book Details</div>
+  <mat-form-field class="dialog-field" [appearance]="&apos;legacy&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
+    <input matInput [(ngModel)]="page.bookDetails.title" placeholder="Title" [required]="false" [disabled]="true">
+
+  </mat-form-field>
+  <mat-form-field class="dialog-field" [appearance]="&apos;legacy&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
+    <input matInput [(ngModel)]="page.bookDetails.isbn" placeholder="ISBN" [required]="false" [disabled]="true">
+
+  </mat-form-field>
+  <mat-form-field class="dialog-field" [appearance]="&apos;legacy&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
+    <input matInput [(ngModel)]="page.bookDetails.author" placeholder="Author" [required]="false" [disabled]="true">
+
+  </mat-form-field>
+  <mat-form-field class="dialog-field" [appearance]="&apos;legacy&apos;" [floatLabel]="&apos;auto&apos;" [hideRequiredMarker]="false">
+    <input matInput [(ngModel)]="page.bookDetails.publishedYear" placeholder="Published Year" [required]="false" [disabled]="true">
+
+  </mat-form-field><button mat-button class="dialog-close-btn" (click)="close()">Close</button>
+</div>

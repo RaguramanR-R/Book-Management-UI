@@ -1,0 +1,39 @@
+{
+    "routes": [
+        {
+            "path": "home",
+            "component": "stepperComponent"
+        },
+        {
+            "path": "book_list",
+            "component": "book_listComponent"
+        },
+        {
+            "path": "addbook",
+            "component": "addbookComponent"
+        },
+        {
+            "path": "stepper",
+            "component": "stepperComponent"
+        },
+        {
+            "path": "audit_list",
+            "component": "audit_listComponent"
+        },
+        {
+            "path": "edit_book/:id",
+            "component": "edit_bookComponent"
+        },
+        {
+            "path": "''",
+            "redirectTo": "book_list",
+            "pathMatch": "full",
+            "default": true
+        },
+        {
+            "path": "**",
+            "component": "PageNotFoundComponent",
+            "redirectTo": ""
+        }
+    ]
+}

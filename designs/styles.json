@@ -1,0 +1,31 @@
+{
+    "classes": [
+        "mat-raised-button",
+        "page-title",
+        "mat-card",
+        "mat-paginator",
+        "edit-btn",
+        "delete-btn",
+        "audit-row",
+        "dropdown",
+        "time",
+        "download-pdf",
+        "back-btn",
+        "add-btn",
+        "mat-button",
+        "search-btn",
+        "update-btn",
+        "book-table",
+        "book-table-header",
+        "dialog-success-heading",
+        "dialog-subheading",
+        "dialog-field",
+        "dialog-close-btn",
+        "confirm-btn-row",
+        "btn-cancel",
+        "btn-confirm",
+        "hide-column",
+        "logout-icon-btn",
+        "mat-button-wrapper"
+    ]
+}

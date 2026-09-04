@@ -1,0 +1,158 @@
+[
+    {
+        "id": "sd_liO2FaCdv2OL4vQb",
+        "type": "tab",
+        "createdDate": "2026-07-02T18:03:29.643Z",
+        "label": "deleteconfirmationbox",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "deleteconfirmationboxComponent"
+    },
+    {
+        "id": "sd_EgEItM2DJJXGpPmD",
+        "type": "OnInit",
+        "z": "sd_liO2FaCdv2OL4vQb",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "",
+        "functionName": "sd_EgEItM2DJJXGpPmD",
+        "category": "Lifecycle Events",
+        "x": 30,
+        "y": 30,
+        "wires": [
+            [
+                "sd_Wp1AGdxQsEwhrJie"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "deleteconfirmationboxComponent"
+    },
+    {
+        "id": "sd_Wp1AGdxQsEwhrJie",
+        "type": "PageVariables",
+        "z": "sd_liO2FaCdv2OL4vQb",
+        "viewType": "pages",
+        "nodeType": "flow",
+        "name": "",
+        "inputs": 1,
+        "outputs": 1,
+        "operation": "set",
+        "globalVariables": [],
+        "functionName": "sd_Wp1AGdxQsEwhrJie",
+        "category": "Function",
+        "x": 180,
+        "y": 30,
+        "wires": [
+            []
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "deleteconfirmationboxComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_KIH3te5GisVwM5j9",
+        "type": "PageStart",
+        "z": "sd_liO2FaCdv2OL4vQb",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "yes",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "yes",
+        "category": "General",
+        "x": 120,
+        "y": 160,
+        "wires": [
+            [
+                "sd_nC6p94ZaN83ZHOGY"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "deleteconfirmationboxComponent"
+    },
+    {
+        "id": "sd_nC6p94ZaN83ZHOGY",
+        "type": "CloseDialog",
+        "z": "sd_liO2FaCdv2OL4vQb",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "data": "\"true\"",
+        "functionName": "sd_nC6p94ZaN83ZHOGY",
+        "category": "Dialog",
+        "x": 220,
+        "y": 160,
+        "wires": [
+            []
+        ],
+        "__ssdTypeInputs__": {
+            "data": {
+                "type": "str",
+                "value": "true",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "deleteconfirmationboxComponent",
+        "generated": true
+    },
+    {
+        "id": "sd_65EAvlogW01YEBsN",
+        "type": "PageStart",
+        "z": "sd_liO2FaCdv2OL4vQb",
+        "viewType": "pages",
+        "nodeType": "start",
+        "name": "No",
+        "outputs": 1,
+        "inputVariables": [],
+        "localVariables": [],
+        "flow_type": "sync",
+        "functionName": "no",
+        "category": "General",
+        "x": 125,
+        "y": 260,
+        "wires": [
+            [
+                "sd_4dV2dJdLqA2Kvr92"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "deleteconfirmationboxComponent"
+    },
+    {
+        "id": "sd_4dV2dJdLqA2Kvr92",
+        "type": "CloseDialog",
+        "z": "sd_liO2FaCdv2OL4vQb",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "data": "\"false\"",
+        "functionName": "sd_4dV2dJdLqA2Kvr92",
+        "category": "Dialog",
+        "x": 225,
+        "y": 260,
+        "wires": [
+            []
+        ],
+        "__ssdTypeInputs__": {
+            "data": {
+                "type": "str",
+                "value": "false",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "deleteconfirmationboxComponent",
+        "generated": true
+    }
+]

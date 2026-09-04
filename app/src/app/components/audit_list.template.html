@@ -1,0 +1,66 @@
+<div fxLayout="row wrap" style=" margin-top:20px " fxLayoutAlign="center stretch" [fxShow]="true">
+  <h3 style="color: black;     text-align: center;     font-weight: 800;   ">
+    Audit List
+    <!-- Wheel Count : {{page.scroll}} -->
+  </h3>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="space-between stretch" [fxShow]="true"><button mat-button style=" background: #1976d2;          color: white;           margin-top: 10px;              margin-bottom: 10px;" class="back-btn" routerLink="/book_list">Back</button><button mat-button style="background: #28a745;     color: white;     margin-top: 10px;     margin-bottom: 10px;" (click)="sd_ehFOpsl8P3oUiw08()">Download PDF</button></div>
+<div fxLayout="row wrap" class="audit-row" fxLayoutAlign="start stretch" [fxShow]="true"><mat-form-field class="dropdown" [appearance]="&apos;legacy&apos;" [floatLabel]="&apos;auto&apos;">
+    <mat-label>Operation Type</mat-label>
+    <mat-select [(value)]="page.operation" placeholder="Select" [(ngModel)]="page.operation" [required]="false">
+      <mat-option [value]="&apos;&apos;" disabled="false">All</mat-option><mat-option [value]="&apos;CREATE_BOOK&apos;" disabled="false">CREATE_BOOK</mat-option><mat-option [value]="&apos;UPDATE_BOOK&apos;" disabled="false">UPDATE_BOOK</mat-option><mat-option [value]="&apos;DELETE_BOOK&apos;" disabled="false">DELETE_BOOK</mat-option><mat-option [value]="&apos;LOGIN&apos;" disabled="false">LOGIN</mat-option><mat-option [value]="&apos;LOGOUT&apos;" disabled="false">LOGOUT</mat-option><mat-option [value]="&apos;GENERATE_PDF&apos;" disabled="false">GENERATE_PDF</mat-option>
+    </mat-select>
+
+  </mat-form-field>
+  <mat-form-field class="time" [appearance]="&apos;legacy&apos;">
+    <mat-label>Start Time</mat-label>
+    <input matInput placeholder="Start Time" [matDatepicker]="startTime" [(ngModel)]="page.startTime" #page.startTime="ngModel" [required]="false" [disabled]="false">
+    <mat-datepicker-toggle matSuffix [for]="startTime" disabled="false"></mat-datepicker-toggle>
+    <mat-datepicker #startTime id="startTime" [disabled]="false"></mat-datepicker>
+
+  </mat-form-field>
+  <mat-form-field class="time" [appearance]="&apos;legacy&apos;">
+    <mat-label>End Time</mat-label>
+    <input matInput placeholder="End Time" [matDatepicker]="endTime" [(ngModel)]="page.endTime" [min]="page.startTime" #page.endTime="ngModel" [required]="false" [disabled]="false">
+    <mat-datepicker-toggle matSuffix [for]="endTime" disabled="false"></mat-datepicker-toggle>
+    <mat-datepicker #endTime id="startTime" [disabled]="false"></mat-datepicker>
+
+  </mat-form-field><button mat-button style="background: #28a745;     color: white;     margin-top: 10px;     margin-bottom: 10px;" class="searchbutton" (click)="auditSearch(page.operation,page.startTime,page.endTime)">Search</button><button mat-button style="background: #1976d2; color: white; margin-top: 10px; margin-bottom: 10px;" (click)="searchclear(null,null,null)">Clear</button>
+</div>
+<div fxLayout="column wrap" fxLayoutAlign="start stretch">
+  <div fxLayout="column" style="width:100%; border:1px solid black;">
+    <table mat-table [dataSource]="page?.auditData" class="table-width-fix">
+      <tr mat-header-row *matHeaderRowDef="[&apos;id&apos;,&apos;operation&apos;,&apos;resourceId&apos;,&apos;userId&apos;,&apos;timestamp&apos;]"></tr>
+      <tr mat-row *matRowDef="let row; columns: [&apos;id&apos;,&apos;operation&apos;,&apos;resourceId&apos;,&apos;userId&apos;,&apos;timestamp&apos;];"></tr>
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let table; let i = index;">{{table.id}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="operation">
+        <th mat-header-cell *matHeaderCellDef>Operation</th>
+        <td mat-cell *matCellDef="let table; let i = index;">{{table.operation}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="resourceId">
+        <th mat-header-cell *matHeaderCellDef>Resource Id</th>
+        <td mat-cell *matCellDef="let table; let i = index;">{{table.resourceId}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef>User Id</th>
+        <td mat-cell *matCellDef="let table; let i = index;">{{table.userId}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="timestamp">
+        <th mat-header-cell *matHeaderCellDef>Timestamp</th>
+        <td mat-cell *matCellDef="let table; let i = index;">{{table.timestamp}}</td>
+      </ng-container>
+    </table>
+  </div>
+  <div fxLayout="row wrap" fxLayoutAlign="center center" [fxShow]="!page?.auditData || page.auditData.length === 0">
+    <div>
+      No Data Found</div>
+  </div>
+</div>

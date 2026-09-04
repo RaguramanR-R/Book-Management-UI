@@ -28,8 +28,6 @@ import { audit_listComponent } from '../components/audit_list.component';
 import { addbookComponent } from '../components/addbook.component';
 //CORE_REFERENCE_IMPORT-book_listComponent
 import { book_listComponent } from '../components/book_list.component';
-//CORE_REFERENCE_IMPORT-stepperComponent
-import { stepperComponent } from '../components/stepper.component';
 
 /**
  * Reads datasource object and injects the datasource object into window object
@@ -74,8 +72,6 @@ export const appDeclarations = [
   addbookComponent,
   //CORE_REFERENCE_PUSH_TO_DEC_ARRAY-book_listComponent
   book_listComponent,
-  //CORE_REFERENCE_PUSH_TO_DEC_ARRAY-stepperComponent
-  stepperComponent,
 ];
 
 /**
@@ -101,10 +97,8 @@ export const appProviders = [
 
 // CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY_START
 export const appRoutes = [
-  { path: 'home', component: stepperComponent },
   { path: 'book_list', component: book_listComponent },
   { path: 'addbook', component: addbookComponent },
-  { path: 'stepper', component: stepperComponent },
   { path: 'audit_list', component: audit_listComponent },
   { path: 'edit_book/:id', component: edit_bookComponent },
   { path: '', redirectTo: 'book_list', pathMatch: 'full' },

@@ -2,7 +2,7 @@ export const environment = {
     "name": "dev",
     "properties": {
         "production": false,
-        "ssdURL": "http://localhost:8081/api/",
+        "ssdURL": "https://api.neutrinos-apps.com/api/",
         "tenantName": "neutrinos-training",
         "appName": "book-management-frontend",
         "namespace": "com.neutrinos-training.book-management-frontend",

@@ -146,7 +146,8 @@ export class addbookComponent {
     try {
       const page = this.page;
       bh.input.isbn = page.isbn;
-      bh.local.url = 'http://localhost:8081/api/book/' + bh.input.isbn;
+      bh.local.url =
+        bh.system.environment.properties.ssdURL + 'book/' + bh.input.isbn;
       bh = this.openbookcall(bh);
       //appendnew_next_sd_pTkdzSKihcDqMGHw
       return bh;
@@ -207,6 +208,7 @@ export class addbookComponent {
       bh.local.req = {
         isbn: page.isbn,
       };
+      bh.local.addurl = bh.system.environment.properties.ssdURL + 'bookadd';
       bh = this.sd_8PtmGVqvzE2y7yl8(bh);
       //appendnew_next_sd_0z7InJbY6yFojOra
       return bh;
@@ -218,7 +220,7 @@ export class addbookComponent {
   async sd_8PtmGVqvzE2y7yl8(bh) {
     try {
       let requestOptions = {
-        url: 'http://localhost:8081/api/bookadd',
+        url: bh.local.addurl,
         method: 'post',
         responseType: 'json',
         headers: {},

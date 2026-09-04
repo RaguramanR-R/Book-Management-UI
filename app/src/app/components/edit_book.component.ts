@@ -119,7 +119,8 @@ export class edit_bookComponent {
   sd_yGpEAahBAr46AKBn(bh) {
     try {
       const page = this.page;
-      bh.local.url = 'http://localhost:8081/api/books/' + page.id;
+      bh.local.url =
+        bh.system.environment.properties.ssdURL + 'books/' + page.id;
 
       bh = this.fetchBooks(bh);
       //appendnew_next_sd_yGpEAahBAr46AKBn
@@ -177,7 +178,8 @@ export class edit_bookComponent {
       console.log('Page ISBN:', page.isbn);
       console.log('page.local.id:', page.id);
 
-      bh.local.url = 'http://localhost:8081/api/books/' + page.id;
+      bh.local.url =
+        bh.system.environment.properties.ssdURL + 'books/' + page.id;
       bh.local.req = {
         isbn: page.isbn,
       };

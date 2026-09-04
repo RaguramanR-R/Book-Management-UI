@@ -173,7 +173,7 @@ export class audit_listComponent {
         params.push('operation=' + encodeURIComponent(bh.input.operation));
       }
 
-      bh.local.url = 'http://localhost:8081/api/audits';
+      bh.local.url = bh.system.environment.properties.ssdURL + 'audits';
 
       if (params.length > 0) {
         bh.local.url += '?' + params.join('&');
@@ -266,7 +266,7 @@ export class audit_listComponent {
 
         return `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}`;
       }
-      let url = 'http://localhost:8081/api/report/pdf';
+      let url = bh.system.environment.properties.ssdURL + 'report/pdf';
 
       let params = [];
 
@@ -361,7 +361,7 @@ export class audit_listComponent {
 
         return `${yyyy}-${MM}-${dd}T${HH}:${mm}:${ss}`;
       }
-      let url = 'http://localhost:8081/api/audits';
+      let url = bh.system.environment.properties.ssdURL + 'audits';
 
       let params = [];
 

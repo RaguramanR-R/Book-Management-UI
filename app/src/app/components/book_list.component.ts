@@ -145,7 +145,8 @@ export class book_listComponent {
         page.pageSize
       );
       bh.local.url =
-        'http://localhost:8081/api/books?limit=' +
+        bh.system.environment.properties.ssdURL +
+        'books?limit=' +
         page.pageSize +
         '&offset=' +
         page.offset;
@@ -261,7 +262,8 @@ export class book_listComponent {
     try {
       const page = this.page;
       console.log('Book ID:', bh.input.bookID);
-      bh.local.url = 'http://localhost:8081/api/books/' + bh.input.bookID;
+      bh.local.url =
+        bh.system.environment.properties.ssdURL + 'books/' + bh.input.bookID;
 
       bh = this.bookdelete(bh);
       //appendnew_next_sd_40VK8QazVz6yPKqp
@@ -370,7 +372,8 @@ export class book_listComponent {
       page.pageSize = bh.input.pageSize || 2;
       page.offset = page.currentPage * page.pageSize;
       bh.local.url =
-        'http://localhost:8081/api/books?limit=' +
+        bh.system.environment.properties.ssdURL +
+        'books?limit=' +
         page.pageSize +
         '&offset=' +
         page.offset;
@@ -471,6 +474,8 @@ export class book_listComponent {
       const page = this.page;
       console.log('111111111111111');
       await page.noc.logout();
+      bh.local.url = bh.system.environment.properties.ssdURL + 'logout';
+
       bh = this.auditlog(bh);
       //appendnew_next_sd_fOQuU78Y20owXCbs
       return bh;
@@ -482,7 +487,7 @@ export class book_listComponent {
   async auditlog(bh) {
     try {
       let requestOptions = {
-        url: 'http://localhost:8081/api/logout',
+        url: bh.local.url,
         method: 'get',
         responseType: 'json',
         headers: {},
